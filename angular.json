@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/hybrid-fresh-farm",
+            "outputPath": "dist/HybridFreshFarm/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -94,8 +94,87 @@
             ],
             "scripts": []
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/HybridFreshFarm/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "HybridFreshFarm:build:development",
+              "serverTarget": "HybridFreshFarm:server:development"
+            },
+            "production": {
+              "browserTarget": "HybridFreshFarm:build:production",
+              "serverTarget": "HybridFreshFarm:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "HybridFreshFarm:build:production",
+              "serverTarget": "HybridFreshFarm:server:production"
+            },
+            "development": {
+              "browserTarget": "HybridFreshFarm:build:development",
+              "serverTarget": "HybridFreshFarm:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "app-shell": {
+          "builder": "@angular-devkit/build-angular:app-shell",
+          "options": {
+            "route": "shell"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "HybridFreshFarm:build:production",
+              "serverTarget": "HybridFreshFarm:server:production"
+            },
+            "development": {
+              "browserTarget": "HybridFreshFarm:build:development",
+              "serverTarget": "HybridFreshFarm:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "9197bfde-9f4c-4e71-bb91-b0eb7004d7fc"
   }
 }
