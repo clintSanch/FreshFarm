@@ -9,15 +9,15 @@ export class User {
     password = '';
     phone_number!: 790001373;
 
-    static register(user:UserData){
+    static register(user: UserData) {
         return {
             userid: user.userId, firstname: user.firstname, lastname: user.lastname, mailAddress: user.email, number: user.phone_number, password: user.password
         }
     }
 
-    static login(user:UserData){
+    static login(user: UserData) {
         return {
-            
+
         }
     }
 }
