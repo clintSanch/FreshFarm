@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   
-  { path: '', redirectTo: '/home', pathMatch: 'full'},
+  { path: 'home', component: HomeComponent},
+  
   { path: 'signIn', loadChildren: () => import('../Modules/General/sign-in/signIn.module').then(module => module.SignInUpModule)},
   { path: 'signUp', loadChildren: () => import('../Modules/General/sign-up/sign-up/signUp.module').then(module => module.SignUpModule)},
   { path : 'mpesa', loadChildren: () => import('../Modules/BusinessLogic/mpesa/mpesa/mpesa.module').then(module => module.MpesaModule)},

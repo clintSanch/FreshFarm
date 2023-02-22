@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { gql } from 'apollo-angular';
+import { Socket } from 'ngx-socket-io';
 import { User } from 'src/DocumentObjectModel/user';
 
 @Injectable({
@@ -7,7 +8,7 @@ import { User } from 'src/DocumentObjectModel/user';
 })
 export class AuthService {
 
-  constructor() { }
+  constructor(private wsocket: Socket) { }
 
   registerUser = gql`
         mutation registerUser{
