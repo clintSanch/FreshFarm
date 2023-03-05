@@ -16,6 +16,8 @@ import { HttpLink } from 'apollo-angular/http';
 import { InMemoryCache } from '@apollo/client/core';
 import { HomeComponent } from './home/home.component';
 import { environment } from 'src/environments/environment';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 const config: SocketIoConfig = {
@@ -40,7 +42,9 @@ const config: SocketIoConfig = {
     RouterModule,
     HomeModule,
     GraphQLModule,
-    ApolloModule
+    ApolloModule,
+    NgbModule,
+    BrowserAnimationsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: BrowserStateInterceptor, multi: true },
