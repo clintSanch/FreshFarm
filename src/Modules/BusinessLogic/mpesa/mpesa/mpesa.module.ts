@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { MpesaRoutingModule } from './mpesa-routing.module';
 import { MpesaComponent } from '../mpesa.component';
+import { ClientSocketService } from 'src/Services/clientSocketServices/client-socket.service';
 
 
 @NgModule({
@@ -14,7 +15,7 @@ import { MpesaComponent } from '../mpesa.component';
     MpesaRoutingModule
   ],
   providers: [
-
+    ClientSocketService
   ],
   exports: [
     MpesaComponent

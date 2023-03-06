@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { PaypalRoutingModule } from './paypal-routing.module';
 import { PaypalComponent } from '../paypal.component';
+import { ClientSocketService } from 'src/Services/clientSocketServices/client-socket.service';
 
 
 @NgModule({
@@ -14,7 +15,7 @@ import { PaypalComponent } from '../paypal.component';
     PaypalRoutingModule
   ],
   providers: [
-
+    ClientSocketService
   ],
   exports: [
     PaypalComponent 
