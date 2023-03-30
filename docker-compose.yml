@@ -1,0 +1,20 @@
+version: '3.8'
+services: 
+  web:
+      container_name: fresh-farm-app
+      build: .
+      ports:
+        - "4200:80"
+      depends_on:
+        - db
+        - cache
+
+  db:
+      container_name:
+      build:
+      ports: 
+
+  cache:
+      image: 
+      ports:
+        -      
