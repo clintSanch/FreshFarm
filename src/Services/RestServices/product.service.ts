@@ -9,5 +9,9 @@ import { Constants } from 'src/app/Config/constants';
 })
 export class ProductService {
 
-  constructor(private httpClient: HttpClient, private wsocket: Socket) { }
+  constructor(private httpClient: HttpClient, private wsocket: Socket, private constant: Constants) { }
+
+  api_url = this.constant.api_Endpoints;
+  mock_url = this.constant.mock_Endpoints;
+  
 }
