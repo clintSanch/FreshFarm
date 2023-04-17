@@ -10,9 +10,14 @@ services:
         - cache
 
   db:
+      image: postgres-alpine  
       container_name:
+      restart: always
       build:
-      ports: 
+      ports:
+        -  5432:5432
+      environment:
+        postgres_password: 71c394clint
 
   cache:
       image: 

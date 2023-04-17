@@ -13,5 +13,29 @@ export class ProductService {
 
   api_url = this.constant.api_Endpoints;
   mock_url = this.constant.mock_Endpoints;
+
+  postProduct(){
+
+    return;
+  }
+
+  getProducts = () => {
+    return;
+  }
+
+  getIndividulProduct(){
+
+    return;
+  }
+
+  updateProduct(){
+
+    return;
+  }
+
+  removeProduct(){
+
+    return;
+  }
   
 }
