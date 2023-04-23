@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { gql } from 'apollo-angular';
+import { Apollo, gql } from 'apollo-angular';
+import { UserData } from 'src/DocumentObjectModel/user-data'
 
 @Injectable({
   providedIn: 'root'
@@ -10,16 +11,20 @@ export class DataService {
 
   removeUser = gql`
        mutation removeUser{
-        removeuser(){
-
+        removeuser(UserData.userId){
+          
         }
        }
   `;
 
   updateUser = gql`
       mutation updateUser{
-        updateUser(){
-          
+        updateUser(userId: 100){
+          this.firstname,
+          this.lastname,
+          this.email,
+          this.password,
+          this.phone_number
         }
       }
   `;
