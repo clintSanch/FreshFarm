@@ -3,6 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,10 +22,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 const config: SocketIoConfig = {
-  url: environment.serverUrl,
+  url: "http://localhost:5000",
   options: {
     
   }
+}
+
+export const tokenGetter = () => {
+  return localStorage.getItem("");
 }
 
 @NgModule({
@@ -37,7 +42,12 @@ const config: SocketIoConfig = {
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserTransferStateModule,
     TransferHttpCacheModule,
-    SocketIoModule,
+    SocketIoModule.forRoot(config),
+    JwtModule.forRoot({ config : {
+      tokenGetter: tokenGetter,
+      allowedDomains: [""],
+      disallowedRoutes: [""]
+    }}),
     AppRoutingModule,
     RouterModule,
     HomeModule,
