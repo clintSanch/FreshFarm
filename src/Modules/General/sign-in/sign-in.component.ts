@@ -14,8 +14,8 @@ export class SignInComponent implements OnChanges, OnInit, OnDestroy {
 
   @Input() data: string | undefined;
   loginForm!: FormGroup;
-  submitted = false;
-  user! : User;
+  @Input() submitted = false;
+  @Input() user! : User;
 
   constructor(private authSr: AuthService, private dataSr: DataService, private fb: FormBuilder, private router: Router) { }
 
@@ -29,10 +29,10 @@ export class SignInComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.loginForm?.clearAsyncValidators();
+    
   }
 
-  buildForm(){
+  private buildForm(){
 
     this.loginForm = this.fb.group({
       firstname: [this.user.firstname, Validators.required],
@@ -43,7 +43,7 @@ export class SignInComponent implements OnChanges, OnInit, OnDestroy {
 
   submit() {
     this.submitted = true;
-    if (this.loginForm?.valid) {
+    if (this.loginForm?.valid && this.loginForm.dirty) {
       this.router.navigateByUrl('navigate to some page necessary');
     }
   }

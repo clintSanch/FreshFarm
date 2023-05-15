@@ -13,9 +13,9 @@ import { User } from 'src/DocumentObjectModel/user';
 export class SignUpComponent implements OnChanges, OnInit, OnDestroy {
 
   @Input() data: string | undefined;
-  @Input() registerForm: FormGroup | undefined;
-  submitted = false;
-  user!: User;
+  registerForm!: FormGroup;
+  @Input() submitted = false;
+  @Input() user!: User;
 
   constructor(private authSr: AuthService, private dataSr: DataService, private fb: FormBuilder, private router: Router) { }
 
@@ -28,10 +28,10 @@ export class SignUpComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.registerForm?.clearAsyncValidators();
+    
   }
 
-  buildForm(){
+  private buildForm(){
     this.registerForm = this.fb.group({
       firstname: [this.user.firstname, Validators.required],
       lastname: [this.user.lastname, Validators.required],
@@ -43,7 +43,7 @@ export class SignUpComponent implements OnChanges, OnInit, OnDestroy {
 
   submit = () =>{
     this.submitted = true;
-    if(this.registerForm?.valid){
+    if(this.registerForm?.valid && this.registerForm.dirty){
       this.router.navigateByUrl('');
     }
   }

@@ -13,21 +13,21 @@
     <mat-card-header>
         <mat-card-title>Login</mat-card-title>
     </mat-card-header>
-    <form formGroup = "loginForm" (ngSubmit)="submit()">
+    <form [formGroup] = "loginForm" (ngSubmit)="submit()">
         <mat-card-content>
             <mat-form-field>
                 <mat-label>Username:</mat-label>
-                <input matInput class="" formControlName="" placeholder="enter username here">
+                <input matInput class="" formControlName="firstname" placeholder="enter username here">
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Email:</mat-label>
-                <input matInput class="" formContolName="" placeholder="enter your email address here">
+                <input matInput class="" formContolName="email" placeholder="enter your email address here">
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Password:</mat-label>
-                <input matInput class = "" formControlName="" placeholder="enter password here">
+                <input matInput class = "password" formControlName="password" placeholder="enter password here">
             </mat-form-field>
-            <button mat-raised-button color="primary" type="submit">Login</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">Login</button>
         </mat-card-content>
     </form>
     
