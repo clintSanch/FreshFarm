@@ -57,18 +57,7 @@ export const tokenGetter = () => {
     BrowserAnimationsModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: BrowserStateInterceptor, multi: true },
-    {
-      provide: APOLLO_OPTIONS, useFactory(httpLink: HttpLink) {
-        return {
-          cache: new InMemoryCache(),
-          link: httpLink.create({
-            uri: ''
-          })
-        }
-      },
-      deps: [HttpLink]
-    }
+    { provide: HTTP_INTERCEPTORS, useClass: BrowserStateInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
