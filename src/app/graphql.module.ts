@@ -5,16 +5,27 @@ import { HttpLink } from 'apollo-angular/http';
 import { onError } from '@apollo/client/link/error';
 
 
-const errorLink = onError(({ graphQLErrors, networkError, operation, forward }) => {
+const errorLink = onError(({ graphQLErrors, networkError, response }) => {
+
+  /**
+   * Errors to be Handled( errors--5xx, 4xx)
+   * Bad Gateway Error,
+   * Internal Server Error
+   * Suspended User Response/Error
+   * Unavailable in the Country Response/Error
+   * Deleted User Response
+   * Blocked User Response
+   * 
+   */
 
   if (graphQLErrors) {
     graphQLErrors.map(({ message, locations, path }) => {
-      console.log(`[GraphQL Error]: Message: ${message}, Locations: ${locations}, Path: ${path}`)
+      console.log(`[GraphQL Error]: Message: ${message}, Locations: ${JSON.stringify(locations)}, Path: ${path}, Response: ${response}`)
     });
   }
 
   if (networkError) {
-    console.log(`[Network Error]: ${networkError}`)
+    console.log(`[Network Error]: ${networkError.name}, Message: ${networkError.message}, Stack: ${networkError.stack}, Response: ${response}`)
   }
 });
 
@@ -29,9 +40,15 @@ const errorLink = onError(({ graphQLErrors, networkError, operation, forward }) 
       useFactory: (httpLink: HttpLink) => {
 
         return {
-          cache: new InMemoryCache(),
-          link: from([httpLink.create({ uri: 'http://localhost:5000/api/graphql' }),
-          errorLink
+          cache: new InMemoryCache({
+            typePolicies: {
+              User: {
+                keyFields: ['firstname', 'email']
+              }
+            }
+          }),
+          link: from([httpLink.create({ uri: 'http://localhost:5000/api/graphqlAPI/' }),
+            errorLink
           ])
         }
       },

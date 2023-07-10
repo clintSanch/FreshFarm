@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/clintSanch/FreshFarm.git"
+    "url": "https://github.com/clintSanch/FreshFarm.git"
   },
   "scripts": {
     "ng": "ng",

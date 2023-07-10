@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { Socket } from 'ngx-socket-io';
@@ -33,9 +34,6 @@ export class AuthService {
 
   constructor(private wsocket: Socket, private constant: Constants, private apollo: Apollo) { }
 
-  api_url = this.constant.api_Endpoints;
-  mock_url = this.constant.mock_Endpoints;
-
   /**
    * create,
    * update, and 
@@ -50,7 +48,10 @@ export class AuthService {
   async registerUser() {
 
     return this.apollo.mutate({
-      mutation: userRegister
+      mutation: userRegister,
+      context: {
+        headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token') || null}`)
+      }
     }).subscribe(({ data }) => {
 
     }, error => {
@@ -61,9 +62,12 @@ export class AuthService {
   async loginUser() {
 
     return this.apollo.mutate({
-      mutation: userLogin
+      mutation: userLogin,
+      context: {
+        headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token') || null}`)
+      }
     }).subscribe(({ data }) => {
-
+      
     }, error => {
       console.log(error)
     });

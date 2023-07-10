@@ -3,39 +3,39 @@ import { HttpClient } from '@angular/common/http';
 import { ProductProperties } from 'src/DocumentObjectModel/product-properties';
 import { Socket } from 'ngx-socket-io';
 import { Constants } from 'src/app/Config/constants';
+import { commonEnvironment } from 'src/environments/environment.common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  constructor(private httpClient: HttpClient, private wsocket: Socket, private constant: Constants) { }
+  urlEnv = commonEnvironment.serverUrl;
 
-  api_url = this.constant.api_Endpoints;
-  mock_url = this.constant.mock_Endpoints;
+  constructor(private httpClient: HttpClient, private wsocket: Socket, private constant: Constants) { }
 
   postProduct(){
 
-    return;
+    return this.httpClient.post(`${this.urlEnv}/api/`, Option);
   }
 
   getProducts = () => {
-    return;
+    return this.httpClient.get(`${this.urlEnv}/api/`);
   }
 
   getIndividulProduct(){
 
-    return;
+    return this.httpClient.get(`${this.urlEnv}/api/`);
   }
 
   updateProduct(){
 
-    return;
+    return this.httpClient.put(`${this.urlEnv}/api/`, Option);
   }
 
   removeProduct(){
 
-    return;
+    return this.httpClient.delete(`${this.urlEnv}/api/`);
   }
   
 }

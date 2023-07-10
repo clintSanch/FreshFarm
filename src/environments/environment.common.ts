@@ -2,5 +2,5 @@
 export const commonEnvironment = {
     production : false,
     environmentName: 'Development',
-    serverUrl: ''
+    serverUrl: 'http://localhost:5000'
 }
